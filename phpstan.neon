@@ -1,0 +1,17 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+    - vendor/nesbot/carbon/extension.neon
+
+parameters:
+
+    paths:
+        - app/
+
+    # Level 10 is the highest level
+    level: max
+
+    ignoreErrors:
+        -
+            message: '#Call to an undefined method Inertia\\Testing\\AssertableInertia::hasResource\(\)#'
+        -
+            identifier: missingType.iterableValue
