@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Enums\SeasonStatus;
-use App\Filament\Resources\SeasonResource\Pages;
-use App\Models\Season;
-use Filament\Forms\Components\Select;
+use App\Filament\Resources\UserResource\Pages;
+use App\Models\User;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -15,29 +13,27 @@ use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
-final class SeasonResource extends Resource
+final class UserResource extends Resource
 {
-    protected static ?string $model = Season::class;
+    protected static ?string $model = User::class;
 
-    protected static ?string $slug = 'seasons';
+    protected static ?string $slug = 'users';
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static ?string $navigationIcon = 'heroicon-o-user';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('year')
-                    ->required()
-                    ->integer(),
+                TextInput::make('username')
+                    ->required(),
 
-                Select::make('status')
-                    ->required()
-                    ->options(SeasonStatus::class),
+                TextInput::make('discord_id')
+                    ->required(),
             ]);
     }
 
@@ -45,14 +41,12 @@ final class SeasonResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('year'),
+                TextColumn::make('username'),
 
-                TextColumn::make('status')
-                    ->badge(),
+                IconColumn::make('admin'),
             ])
             ->filters([
-                SelectFilter::make('Status')
-                    ->options(SeasonStatus::class),
+                //
             ])
             ->actions([
                 EditAction::make(),
@@ -68,9 +62,9 @@ final class SeasonResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSeasons::route('/'),
-            'create' => Pages\CreateSeason::route('/create'),
-            'edit' => Pages\EditSeason::route('/{record}/edit'),
+            'index' => Pages\ListUsers::route('/'),
+            'create' => Pages\CreateUser::route('/create'),
+            'edit' => Pages\EditUser::route('/{record}/edit'),
         ];
     }
 

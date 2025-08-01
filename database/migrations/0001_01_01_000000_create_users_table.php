@@ -14,7 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('username');
             $table->string('discord_id');
-            $table->string('avatar');
+            $table->string('avatar')->default('');
             $table->boolean('admin')->default(false);
             $table->timestamps();
         });
