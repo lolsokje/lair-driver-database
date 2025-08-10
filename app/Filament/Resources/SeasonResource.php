@@ -6,6 +6,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\SeasonStatus;
 use App\Filament\Resources\SeasonResource\Pages;
+use App\Filament\Resources\SeasonResource\RelationManagers\OwnershipGroupsRelationManager;
 use App\Models\Season;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -63,6 +64,13 @@ final class SeasonResource extends Resource
                     DeleteBulkAction::make(),
                 ]),
             ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            OwnershipGroupsRelationManager::class,
+        ];
     }
 
     public static function getPages(): array

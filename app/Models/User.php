@@ -12,6 +12,7 @@ use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Socialite\Contracts\User as SocialiteUserContract;
@@ -61,6 +62,11 @@ final class User extends Authenticatable implements FilamentSocialiteUser, Filam
     public function getUser(): AuthenticatableContract
     {
         return $this;
+    }
+
+    public function ownershipGroups(): BelongsToMany
+    {
+        return $this->belongsToMany(OwnershipGroup::class);
     }
 
     protected function casts(): array
