@@ -1,5 +1,11 @@
+@php
+    $state = $getState();
+    $record = $state['record'] ?? null;
+    $value = $state['value'] ?? '';
+@endphp
+
 <div class="fi-ta-text grid gap-y-1 px-3 py-4">
-    <div style="background-color: {{ $getRecord()->background_colour }};color: {{ $getRecord()->text_colour }}" class="px-2 py-1 rounded uppercase text-xs font-bold">
-        {{ $getState() }}
+    <div style="background-color: {{ $record->background_colour }};color: {{ $record->text_colour }}" class="px-2 py-1 rounded uppercase text-xs font-bold">
+        {{ $value }}
     </div>
 </div>

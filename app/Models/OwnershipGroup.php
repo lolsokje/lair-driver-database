@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Builders\OwnershipGroupBuilder;
+use Illuminate\Database\Eloquent\Attributes\UseEloquentBuilder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
+#[UseEloquentBuilder(OwnershipGroupBuilder::class)]
 final class OwnershipGroup extends Model
 {
     public function season(): BelongsTo
@@ -31,5 +35,10 @@ final class OwnershipGroup extends Model
         $this->update([
             'name' => $name,
         ]);
+    }
+
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
     }
 }

@@ -18,4 +18,9 @@ final class Season extends Model
     {
         return $this->hasMany(OwnershipGroup::class);
     }
+
+    public function teams(): HasMany
+    {
+        return $this->hasMany(Team::class);
+    }
 }
