@@ -17,6 +17,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,6 +39,8 @@ final class OwnershipGroupResource extends Resource
                     ->options(Season::query()->orderByDesc('year')->pluck('year', 'id')),
 
                 TextInput::make('name')
+                    ->disabled(fn (OwnershipGroup $group) => $group->users->count() > 0)
+                    ->helperText(fn (OwnershipGroup $group) => $group->users->count() > 0 ? 'The name is automatically generated based on attached users' : '')
                     ->required(),
             ]);
     }
@@ -46,6 +49,12 @@ final class OwnershipGroupResource extends Resource
     {
         return $table
             ->modifyQueryUsing(fn (Builder $query) => $query->with('season'))
+            ->defaultSort(function (Builder $query) {
+                return $query
+                    ->withAggregate('season', 'year')
+                    ->orderBy('name')
+                    ->orderBy('season_year', 'DESC');
+            })
             ->columns([
                 TextColumn::make('season_id')
                     ->label('Season')
@@ -57,15 +66,13 @@ final class OwnershipGroupResource extends Resource
                 TextColumn::make('name')
                     ->searchable()
                     ->sortable(),
-
-                TextColumn::make('users.username')
-                    ->label('Users'),
             ])
             ->filters([
                 SelectFilter::make('season_id')
                     ->label('Season')
                     ->relationship('season', 'Year'),
             ])
+            ->filtersLayout(FiltersLayout::AboveContent)
             ->actions([
                 EditAction::make(),
                 DeleteAction::make(),

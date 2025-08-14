@@ -17,6 +17,19 @@ final class OwnershipGroup extends Model
 
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)
+            ->using(OwnershipGroupUser::class);
+    }
+
+    public function updateName(): void
+    {
+        $name = $this->users
+            ->sortBy('username')
+            ->map(fn (User $user) => $user->username)
+            ->join(', ');
+
+        $this->update([
+            'name' => $name,
+        ]);
     }
 }

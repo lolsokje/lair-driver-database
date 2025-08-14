@@ -11,6 +11,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Livewire\Component;
 
 final class UsersRelationManager extends RelationManager
 {
@@ -27,6 +28,7 @@ final class UsersRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('username')
+            ->defaultSort('username')
             ->columns([
                 Tables\Columns\TextColumn::make('username'),
             ])
@@ -35,6 +37,7 @@ final class UsersRelationManager extends RelationManager
             ])
             ->headerActions([
                 Tables\Actions\AttachAction::make()
+                    ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName'))
                     ->multiple()
                     ->recordSelectOptionsQuery(function (Builder $query) {
                         /** @var OwnershipGroup $group */
@@ -55,7 +58,8 @@ final class UsersRelationManager extends RelationManager
                     ->preloadRecordSelect(),
             ])
             ->actions([
-                Tables\Actions\DetachAction::make(),
+                Tables\Actions\DetachAction::make()
+                    ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
