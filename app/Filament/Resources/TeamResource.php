@@ -52,6 +52,11 @@ final class TeamResource extends Resource
                 // However, always sort teams by season first, then by series to keep them grouped
                 $query->withAggregate('season', 'year')
                     ->withAggregate('series', 'name')
+                    ->with([
+                        'ownershipGroup' => [
+                            'users',
+                        ],
+                    ])
                     ->orderBy('season_year')
                     ->orderBy('series_name');
             })

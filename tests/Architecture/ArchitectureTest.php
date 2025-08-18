@@ -38,5 +38,9 @@ arch('Illuminate\Http\RedirectResponse not used')
     ->expect(RedirectResponse::class)
     ->toBeUsedInNothing();
 
+arch('debug methods are not used')
+    ->expect('App')
+    ->not->toUse(['die', 'dd', 'dump']);
+
 arch()->preset()->php();
 arch()->preset()->security();

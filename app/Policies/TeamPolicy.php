@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
+use App\Models\OwnershipGroup;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -33,9 +34,10 @@ final class TeamPolicy
             return true;
         }
 
+        /** @var OwnershipGroup $ownershipGroup */
         $ownershipGroup = $team->ownershipGroup;
 
-        dd($ownershipGroup);
+        return $ownershipGroup->users->contains('id', $user->id);
     }
 
     public function delete(User $user, Team $team): bool
