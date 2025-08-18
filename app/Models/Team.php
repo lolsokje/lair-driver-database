@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class Team extends Model
 {
@@ -22,5 +23,16 @@ final class Team extends Model
     public function series(): BelongsTo
     {
         return $this->belongsTo(Series::class);
+    }
+
+    public function drivers(): BelongsToMany
+    {
+        return $this->belongsToMany(Driver::class)
+            ->withPivot([
+                'number',
+                'rating',
+                'driver_sheet_id',
+                'reserve',
+            ]);
     }
 }

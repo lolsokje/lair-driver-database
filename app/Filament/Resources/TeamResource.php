@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TeamResource\Pages;
+use App\Filament\Resources\TeamResource\RelationManagers\DriversRelationManager;
 use App\Filament\Schemas\TeamSchema;
 use App\Models\Team;
 use App\Tables\Columns\SeriesBadge;
@@ -156,5 +157,12 @@ final class TeamResource extends Resource
         }
 
         return $details;
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            DriversRelationManager::class,
+        ];
     }
 }

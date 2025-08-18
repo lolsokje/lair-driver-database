@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tables\Columns;
 
+use App\Models\Driver;
 use Filament\Tables\Columns\Column;
+use Illuminate\Database\Eloquent\Collection;
 
 final class SeriesBadge extends Column
 {
@@ -30,6 +32,13 @@ final class SeriesBadge extends Column
 
         if (! $relatedRecord) {
             return null;
+        }
+
+        if ($relatedRecord instanceof Collection) {
+            /** @var Driver $driver */
+            $driver = $this->getRecord();
+
+            $relatedRecord = $relatedRecord->where('id', $driver->series_id)->first();
         }
 
         return [

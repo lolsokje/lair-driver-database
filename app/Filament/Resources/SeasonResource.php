@@ -8,6 +8,7 @@ use App\Enums\SeasonStatus;
 use App\Filament\Resources\SeasonResource\Pages;
 use App\Filament\Resources\SeasonResource\RelationManagers\OwnershipGroupsRelationManager;
 use App\Filament\Resources\SeasonResource\RelationManagers\TeamsRelationManager;
+use App\Filament\Resources\TeamResource\RelationManagers\DriversRelationManager;
 use App\Models\Season;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -71,6 +72,7 @@ final class SeasonResource extends Resource
     {
         return [
             TeamsRelationManager::class,
+            DriversRelationManager::class,
             OwnershipGroupsRelationManager::class,
         ];
     }
