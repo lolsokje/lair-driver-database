@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\SeasonResource\RelationManagers;
 
+use App\Filament\Resources\TeamResource;
 use App\Filament\Schemas\TeamSchema;
 use App\Models\Season;
 use App\Models\Team;
@@ -61,7 +62,8 @@ final class TeamsRelationManager extends RelationManager
                 Tables\Actions\CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()
+                    ->url(fn (Team $record) => TeamResource::getUrl('edit', [$record])),
             ]);
     }
 }
