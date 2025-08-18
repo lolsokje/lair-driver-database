@@ -1,0 +1,394 @@
+[
+    {
+        "series_name": "FIA F1",
+        "short_name": "Mercedes",
+        "full_name": "Mercedes",
+        "owners": "Cosmic / Plate",
+        "team_id": "A"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "HWA",
+        "full_name": "HWA",
+        "owners": "Cosmic / Plate",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "HWA",
+        "full_name": "HWA",
+        "owners": "Cosmic / Plate",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Zengo Motorsport",
+        "full_name": "Zengo Motorsport",
+        "owners": "Cosmic / Plate",
+        "team_id": "E"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Ferrari",
+        "full_name": "Ferrari",
+        "owners": "Franky / Yoshi",
+        "team_id": "C"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "ART",
+        "full_name": "ART",
+        "owners": "Franky / Yoshi",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "ART",
+        "full_name": "ART",
+        "owners": "Franky / Yoshi",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Mission Winnow FDM-ART Racing",
+        "full_name": "Mission Winnow FDM-ART Racing",
+        "owners": "Franky / Yoshi",
+        "team_id": "K"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Red Bull",
+        "full_name": "Red Bull",
+        "owners": "Thunder",
+        "team_id": "B"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "MP",
+        "full_name": "MP",
+        "owners": "Thunder",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "MP",
+        "full_name": "MP",
+        "owners": "Thunder",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Heart of Racing Team Seattle",
+        "full_name": "Heart of Racing Team Seattle",
+        "owners": "Thunder",
+        "team_id": "I"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Force India",
+        "full_name": "Force India",
+        "owners": "ciel",
+        "team_id": "D"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Carlin",
+        "full_name": "Carlin",
+        "owners": "ciel",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Carlin",
+        "full_name": "Carlin",
+        "owners": "ciel",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Yves-Saint Laurent Monaco",
+        "full_name": "Yves-Saint Laurent Monaco",
+        "owners": "ciel",
+        "team_id": "J"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Williams",
+        "full_name": "Williams",
+        "owners": "Vennez / Petr",
+        "team_id": "E"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Jenzer",
+        "full_name": "Jenzer",
+        "owners": "Vennez / Petr",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Jenzer",
+        "full_name": "Jenzer",
+        "owners": "Vennez / Petr",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Raybrig Kunimitsu Honda",
+        "full_name": "Raybrig Kunimitsu Honda",
+        "owners": "Vennez / Petr",
+        "team_id": "A"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Haas",
+        "full_name": "Haas",
+        "owners": "lolsokje",
+        "team_id": "H"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Prema",
+        "full_name": "Prema",
+        "owners": "lolsokje",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Prema",
+        "full_name": "Prema",
+        "owners": "lolsokje",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Prema Racing",
+        "full_name": "Prema Racing",
+        "owners": "lolsokje",
+        "team_id": "N"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "McLaren",
+        "full_name": "McLaren",
+        "owners": "Cody / alpha",
+        "team_id": "F"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Drago Corse",
+        "full_name": "Drago Corse",
+        "owners": "Cody / alpha",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Drago Corse",
+        "full_name": "Drago Corse",
+        "owners": "Cody / alpha",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "JDC-Miller Motorsport",
+        "full_name": "JDC-Miller Motorsport",
+        "owners": "Cody / alpha",
+        "team_id": "F"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Renault",
+        "full_name": "Renault",
+        "owners": "JCesar / Josephi",
+        "team_id": "I"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Arden",
+        "full_name": "Arden",
+        "owners": "JCesar / Josephi",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Arden",
+        "full_name": "Arden",
+        "owners": "JCesar / Josephi",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "KTF Sports",
+        "full_name": "KTF Sports",
+        "owners": "JCesar / Josephi",
+        "team_id": "C"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Audi",
+        "full_name": "Audi",
+        "owners": "Rex / Spooder",
+        "team_id": "L"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Charouz",
+        "full_name": "Charouz",
+        "owners": "Rex / Spooder",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Charouz",
+        "full_name": "Charouz",
+        "owners": "Rex / Spooder",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "BWT Mucke Motorsport",
+        "full_name": "BWT Mucke Motorsport",
+        "owners": "Rex / Spooder",
+        "team_id": "B"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Manor",
+        "full_name": "Manor",
+        "owners": "Skeltal / liam",
+        "team_id": "K"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Trident",
+        "full_name": "Trident",
+        "owners": "Skeltal / liam",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Trident",
+        "full_name": "Trident",
+        "owners": "Skeltal / liam",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Ecurie Ecosse",
+        "full_name": "Ecurie Ecosse",
+        "owners": "Skeltal / liam",
+        "team_id": "D"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Alfa Romeo",
+        "full_name": "Alfa Romeo",
+        "owners": "Damian",
+        "team_id": "J"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Virtuosi",
+        "full_name": "Virtuosi",
+        "owners": "Damian",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Virtuosi",
+        "full_name": "Virtuosi",
+        "owners": "Damian",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Team WRT",
+        "full_name": "Team WRT",
+        "owners": "Damian",
+        "team_id": "G"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Toyota",
+        "full_name": "Toyota",
+        "owners": "Dezent / Apple",
+        "team_id": "M"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "DAMS",
+        "full_name": "DAMS",
+        "owners": "Dezent / Apple",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "DAMS",
+        "full_name": "DAMS",
+        "owners": "Dezent / Apple",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Polestar Pink Racing",
+        "full_name": "Polestar Pink Racing",
+        "owners": "Dezent / Apple",
+        "team_id": "M"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Gresini",
+        "full_name": "Gresini",
+        "owners": "Io / Dave",
+        "team_id": "G"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Hitech",
+        "full_name": "Hitech",
+        "owners": "Io / Dave",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Hitech",
+        "full_name": "Hitech",
+        "owners": "Io / Dave",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Kaspersky G-Drive Racing",
+        "full_name": "Kaspersky G-Drive Racing",
+        "owners": "Io / Dave",
+        "team_id": "L"
+    },
+    {
+        "series_name": "FIA F1",
+        "short_name": "Brabham",
+        "full_name": "Brabham",
+        "owners": "Haan / Luke",
+        "team_id": "N"
+    },
+    {
+        "series_name": "FIA F2",
+        "short_name": "Rapax",
+        "full_name": "Rapax",
+        "owners": "Haan / Luke",
+        "team_id": null
+    },
+    {
+        "series_name": "FIA F3",
+        "short_name": "Rapax",
+        "full_name": "Rapax",
+        "owners": "Haan / Luke",
+        "team_id": null
+    },
+    {
+        "series_name": "WTCC",
+        "short_name": "Lukoil SUNRED Engineering",
+        "full_name": "Lukoil SUNRED Engineering",
+        "owners": "Haan / Luke",
+        "team_id": "H"
+    }
+]

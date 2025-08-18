@@ -1,0 +1,26 @@
+[
+    {
+        "name": "FIA F1",
+        "background_colour": "#262626",
+        "text_colour": "#FFFFFF",
+        "simmed_by": 287293894553501696
+    },
+    {
+        "name": "FIA F2",
+        "background_colour": "#019dda",
+        "text_colour": "#FFFFFF",
+        "simmed_by": 528586437256413184
+    },
+    {
+        "name": "FIA F3",
+        "background_colour": "#e90300",
+        "text_colour": "#FFFFFF",
+        "simmed_by": 528586437256413184
+    },
+    {
+        "name": "WTCC",
+        "background_colour": "#ffc000",
+        "text_colour": "#FFFFFF",
+        "simmed_by": 136818922006511616
+    }
+]
