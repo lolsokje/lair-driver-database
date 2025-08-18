@@ -28,12 +28,20 @@ final class UserPolicy
 
     public function update(User $user, User $model): bool
     {
-        return $user->admin && $user->is($model);
+        return $user->admin;
     }
 
     public function delete(User $user, User $model): bool
     {
-        return $user->admin && ! $model->admin && ! $user->is($model);
+        if (! $user->admin) {
+            return false;
+        }
+
+        if ($model->admin) {
+            return false;
+        }
+
+        return $user->ownershipGroups()->count() === 0;
     }
 
     public function restore(User $user, User $model): bool
