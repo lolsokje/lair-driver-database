@@ -71,6 +71,10 @@ final class TeamResource extends Resource
                 SeriesBadge::make('series.name')
                     ->width('1%'),
 
+                TextColumn::make('season.year')
+                    ->width('1%')
+                    ->alignCenter(),
+
                 TextColumn::make('full_name')
                     ->label('Name')
                     ->description(fn (Team $record) => $record->short_name)
@@ -94,8 +98,6 @@ final class TeamResource extends Resource
                 TextColumn::make('ownershipGroup.name')
                     ->searchable()
                     ->sortable(),
-
-                TextColumn::make('season.year'),
             ])
             ->filters([
                 SelectFilter::make('season')

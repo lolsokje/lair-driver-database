@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Policies;
 
-use App\Models\OwnershipGroup;
 use App\Models\Team;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -30,14 +29,7 @@ final class TeamPolicy
 
     public function update(User $user, Team $team): bool
     {
-        if ($this->check($user)) {
-            return true;
-        }
-
-        /** @var OwnershipGroup $ownershipGroup */
-        $ownershipGroup = $team->ownershipGroup;
-
-        return $ownershipGroup->users->contains('id', $user->id);
+        return $this->check($user);
     }
 
     public function delete(User $user, Team $team): bool
