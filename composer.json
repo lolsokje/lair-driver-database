@@ -16,6 +16,7 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "socialiteproviders/discord": "^4.2",
+        "stechstudio/filament-impersonate": "^3.16",
         "tightenco/ziggy": "^2.4"
     },
     "require-dev": {
