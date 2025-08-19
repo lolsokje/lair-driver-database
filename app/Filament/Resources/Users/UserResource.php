@@ -19,7 +19,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use STS\FilamentImpersonate\Tables\Actions\Impersonate;
+use STS\FilamentImpersonate\Actions\Impersonate;
 
 final class UserResource extends Resource
 {
@@ -54,6 +54,7 @@ final class UserResource extends Resource
             ])
             ->recordActions([
                 Impersonate::make()
+                    ->label('')
                     ->redirectTo(ListUsers::getUrl()),
                 EditAction::make(),
                 DeleteAction::make(),
