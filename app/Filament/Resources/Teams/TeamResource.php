@@ -12,9 +12,7 @@ use App\Filament\Schemas\TeamSchema;
 use App\Models\Team;
 use App\Tables\Columns\SeriesBadge;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -56,6 +54,7 @@ final class TeamResource extends Resource
                 $query->withAggregate('season', 'year')
                     ->withAggregate('series', 'name')
                     ->with([
+                        'drivers',
                         'ownershipGroup' => [
                             'users',
                         ],
@@ -124,11 +123,6 @@ final class TeamResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

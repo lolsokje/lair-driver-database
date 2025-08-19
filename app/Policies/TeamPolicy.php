@@ -34,7 +34,7 @@ final class TeamPolicy
 
     public function delete(User $user, Team $team): bool
     {
-        return $this->check($user);
+        return $this->check($user) && $team->drivers->count() === 0;
     }
 
     public function restore(User $user, Team $team): bool

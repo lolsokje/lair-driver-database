@@ -75,24 +75,25 @@ final readonly class TeamSchema
                         ->default(fn () => $seriesId)
                         ->helperText('Any missing series means this group already has a team in that series for that season')
                         ->required(),
-                ]),
+                ])
+                ->hidden(fn (?Team $record) => $record !== null),
 
             Grid::make([
                 'sm' => 1,
                 'md' => 12,
             ])
                 ->schema([
-                    TextInput::make('short_name')
-                        ->columnSpan([
-                            'sm' => 1,
-                            'md' => 4,
-                        ])
-                        ->required(),
-
                     TextInput::make('full_name')
                         ->columnSpan([
                             'sm' => 1,
                             'md' => 6,
+                        ])
+                        ->required(),
+
+                    TextInput::make('short_name')
+                        ->columnSpan([
+                            'sm' => 1,
+                            'md' => 4,
                         ])
                         ->required(),
 
