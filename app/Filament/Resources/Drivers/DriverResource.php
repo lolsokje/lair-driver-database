@@ -14,6 +14,7 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Slider;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -56,6 +57,9 @@ final class DriverResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $minDriverRating = Driver::query()->min('rating');
+        $maxDriverRating = Driver::query()->max('rating');
+
         return $table
             ->modifyQueryUsing(function (Builder $query) {
                 return $query
@@ -86,26 +90,6 @@ final class DriverResource extends Resource
                     ->alignCenter(),
             ])
             ->filters([
-                Filter::make('rating')
-                    ->schema([
-                        TextInput::make('min_rating')
-                            ->integer(),
-
-                        TextInput::make('max_rating')
-                            ->integer(),
-                    ])
-                    ->query(function (Builder $query, array $data) {
-                        return $query
-                            ->when(
-                                $data['min_rating'],
-                                fn (Builder $query, int $rating) => $query->where('rating', '>=', $rating),
-                            )
-                            ->when(
-                                $data['max_rating'],
-                                fn (Builder $query, int $rating) => $query->where('rating', '<=', $rating),
-                            );
-                    }),
-
                 Filter::make('date_of_birth')
                     ->schema([
                         DatePicker::make('born_after'),
@@ -120,6 +104,33 @@ final class DriverResource extends Resource
                             ->when(
                                 $data['born_before'],
                                 fn (Builder $query, $date): Builder => $query->whereDate('date_of_birth', '<=', $date),
+                            );
+                    }),
+
+                Filter::make('rating')
+                    ->schema([
+                        Slider::make('rating')
+                            ->range(
+                                minValue: $minDriverRating,
+                                maxValue: $maxDriverRating,
+                            )
+                            ->step(1)
+                            ->decimalPlaces(0)
+                            ->default([$minDriverRating, $maxDriverRating])
+                            ->tooltips()
+                            ->pips(),
+                    ])
+                    ->query(function (Builder $query, array $data) {
+                        [$minRating, $maxRating] = $data['rating'];
+
+                        return $query
+                            ->when(
+                                $minRating,
+                                fn (Builder $query, int $rating) => $query->where('rating', '>=', $rating),
+                            )
+                            ->when(
+                                $maxRating,
+                                fn (Builder $query, int $rating) => $query->where('rating', '<=', $rating),
                             );
                     }),
 
