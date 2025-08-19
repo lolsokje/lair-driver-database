@@ -8,10 +8,18 @@ use App\Models\Driver;
 use App\Models\Season;
 use App\Models\Team;
 use App\Tables\Columns\SeriesBadge;
-use Filament\Forms;
-use Filament\Forms\Form;
+use Filament\Actions\AttachAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DetachAction;
+use Filament\Actions\EditAction;
+use Filament\Forms\Components\Checkbox;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -20,18 +28,18 @@ final class DriversRelationManager extends RelationManager
 {
     protected static string $relationship = 'drivers';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
-                Forms\Components\TextInput::make('number')
+        return $schema
+            ->components([
+                TextInput::make('number')
                     ->integer()
                     ->required(),
 
-                Forms\Components\TextInput::make('driver_sheet_id')
+                TextInput::make('driver_sheet_id')
                     ->label('Driver ID'),
 
-                Forms\Components\Checkbox::make('reserve')
+                Checkbox::make('reserve')
                     ->label('Reserve driver?'),
             ]);
     }
@@ -48,13 +56,13 @@ final class DriversRelationManager extends RelationManager
             })
             ->recordTitleAttribute('given_name')
             ->columns([
-                Tables\Columns\TextColumn::make('driver_sheet_id')
+                TextColumn::make('driver_sheet_id')
                     ->label('ID')
                     ->alignCenter()
                     ->copyable()
                     ->width('1%'),
 
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->searchable(['given_name', 'family_name'])
                     ->sortable()
                     ->copyable()
@@ -63,7 +71,7 @@ final class DriversRelationManager extends RelationManager
                 SeriesBadge::make('series.name')
                     ->width('1%'),
 
-                Tables\Columns\TextColumn::make('season.year')
+                TextColumn::make('season.year')
                     ->state(function (Driver $record) {
                         /** @var Season $season */
                         $season = $this->getOwnerRecord();
@@ -77,18 +85,18 @@ final class DriversRelationManager extends RelationManager
                     ->alignCenter()
                     ->hidden(fn () => $this->isOnTeamsPage()),
 
-                Tables\Columns\TextColumn::make('rating')
+                TextColumn::make('rating')
                     ->width('1%')
                     ->copyable()
                     ->alignCenter(),
 
-                Tables\Columns\TextColumn::make('number')
+                TextColumn::make('number')
                     ->width('1%')
                     ->alignCenter()
                     ->copyable()
                     ->sortable(),
 
-                Tables\Columns\IconColumn::make('reserve')
+                IconColumn::make('reserve')
                     ->boolean()
                     ->width('1%')
                     ->alignCenter(),
@@ -97,7 +105,7 @@ final class DriversRelationManager extends RelationManager
                 //
             ])
             ->headerActions([
-                Tables\Actions\AttachAction::make()
+                AttachAction::make()
                     ->hidden(fn () => ! $this->isOnTeamsPage())
                     ->recordSelectOptionsQuery(function (Builder $query) {
                         /** @var Team $team */
@@ -114,22 +122,22 @@ final class DriversRelationManager extends RelationManager
                     })
                     ->preloadRecordSelect()
                     ->recordTitle(fn (Driver $record) => $record->fullName())
-                    ->form(fn (Tables\Actions\AttachAction $action) => [
+                    ->form(fn (AttachAction $action) => [
                         $action->getRecordSelect()
                             ->searchable(['given_name', 'family_name'])
                             ->required(),
 
-                        Forms\Components\Grid::make()
+                        Grid::make()
                             ->schema([
-                                Forms\Components\TextInput::make('number')
+                                TextInput::make('number')
                                     ->integer()
                                     ->required(),
 
-                                Forms\Components\TextInput::make('driver_sheet_id')
+                                TextInput::make('driver_sheet_id')
                                     ->label('Driver ID'),
                             ]),
 
-                        Forms\Components\Checkbox::make('reserve')
+                        Checkbox::make('reserve')
                             ->label('Reserve driver?'),
                     ])
                     ->using(function (array $data, DriversRelationManager $livewire) {
@@ -146,16 +154,16 @@ final class DriversRelationManager extends RelationManager
                         $team->drivers()->attach($driver->id, $data);
                     }),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make()
+            ->recordActions([
+                EditAction::make()
                     ->modalHeading(fn (Driver $record) => "Edit {$record->fullName()}")
                     ->hidden(fn () => ! $this->isOnTeamsPage()),
-                Tables\Actions\DetachAction::make()
+                DetachAction::make()
                     ->hidden(fn () => ! $this->isOnTeamsPage()),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

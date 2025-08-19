@@ -4,19 +4,22 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\SeriesResource\Pages;
+use App\Filament\Resources\SeriesResource\Pages\CreateSeries;
+use App\Filament\Resources\SeriesResource\Pages\EditSeries;
+use App\Filament\Resources\SeriesResource\Pages\ListSeries;
 use App\Models\Series;
 use App\Models\User;
 use App\Tables\Columns\SeriesBadge;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -26,12 +29,12 @@ final class SeriesResource extends Resource
 
     protected static ?string $slug = 'series';
 
-    protected static ?string $navigationIcon = 'heroicon-o-calculator';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calculator';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('name')
                     ->required(),
 
@@ -64,11 +67,11 @@ final class SeriesResource extends Resource
             ->filters([
                 //
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
@@ -78,9 +81,9 @@ final class SeriesResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSeries::route('/'),
-            'create' => Pages\CreateSeries::route('/create'),
-            'edit' => Pages\EditSeries::route('/{record}/edit'),
+            'index' => ListSeries::route('/'),
+            'create' => CreateSeries::route('/create'),
+            'edit' => EditSeries::route('/{record}/edit'),
         ];
     }
 

@@ -5,9 +5,13 @@ declare(strict_types=1);
 namespace App\Filament\Resources\OwnershipGroupResource\RelationManagers;
 
 use App\Models\OwnershipGroup;
-use Filament\Forms\Form;
+use Filament\Actions\AttachAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\DetachAction;
 use Filament\Resources\RelationManagers\RelationManager;
-use Filament\Tables;
+use Filament\Schemas\Schema;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -17,10 +21,10 @@ final class UsersRelationManager extends RelationManager
 {
     protected static string $relationship = 'users';
 
-    public function form(Form $form): Form
+    public function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
             ]);
     }
 
@@ -30,13 +34,13 @@ final class UsersRelationManager extends RelationManager
             ->recordTitleAttribute('username')
             ->defaultSort('username')
             ->columns([
-                Tables\Columns\TextColumn::make('username'),
+                TextColumn::make('username'),
             ])
             ->filters([
                 //
             ])
             ->headerActions([
-                Tables\Actions\AttachAction::make()
+                AttachAction::make()
                     ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName'))
                     ->multiple()
                     ->recordSelectOptionsQuery(function (Builder $query) {
@@ -57,13 +61,13 @@ final class UsersRelationManager extends RelationManager
                     })
                     ->preloadRecordSelect(),
             ])
-            ->actions([
-                Tables\Actions\DetachAction::make()
+            ->recordActions([
+                DetachAction::make()
                     ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName')),
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
                 ]),
             ]);
     }

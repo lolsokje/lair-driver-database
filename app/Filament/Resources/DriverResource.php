@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DriverResource\Pages;
+use App\Filament\Resources\DriverResource\Pages\CreateDriver;
+use App\Filament\Resources\DriverResource\Pages\EditDriver;
+use App\Filament\Resources\DriverResource\Pages\ListDrivers;
 use App\Filament\Resources\DriverResource\RelationManagers\TeamsRelationManager;
 use App\Models\Driver;
+use BackedEnum;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Checkbox;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
@@ -28,12 +31,12 @@ final class DriverResource extends Resource
 
     protected static ?string $slug = 'drivers';
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('given_name')
                     ->required(),
 
@@ -47,7 +50,7 @@ final class DriverResource extends Resource
                     ->integer(),
 
                 Checkbox::make('retired')
-                    ->hiddenOn(Pages\CreateDriver::class),
+                    ->hiddenOn(CreateDriver::class),
             ]);
     }
 
@@ -84,7 +87,7 @@ final class DriverResource extends Resource
             ])
             ->filters([
                 Filter::make('rating')
-                    ->form([
+                    ->schema([
                         TextInput::make('min_rating')
                             ->integer(),
 
@@ -104,7 +107,7 @@ final class DriverResource extends Resource
                     }),
 
                 Filter::make('date_of_birth')
-                    ->form([
+                    ->schema([
                         DatePicker::make('born_after'),
                         DatePicker::make('born_before'),
                     ])
@@ -123,7 +126,7 @@ final class DriverResource extends Resource
                 TernaryFilter::make('retired'),
             ])
             ->filtersLayout(FiltersLayout::AboveContent)
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()
                     ->hidden(fn (Driver $driver) => count($driver->teams) > 0),
@@ -133,9 +136,9 @@ final class DriverResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDrivers::route('/'),
-            'create' => Pages\CreateDriver::route('/create'),
-            'edit' => Pages\EditDriver::route('/{record}/edit'),
+            'index' => ListDrivers::route('/'),
+            'create' => CreateDriver::route('/create'),
+            'edit' => EditDriver::route('/{record}/edit'),
         ];
     }
 

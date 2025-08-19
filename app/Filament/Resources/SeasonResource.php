@@ -5,19 +5,22 @@ declare(strict_types=1);
 namespace App\Filament\Resources;
 
 use App\Enums\SeasonStatus;
-use App\Filament\Resources\SeasonResource\Pages;
+use App\Filament\Resources\SeasonResource\Pages\CreateSeason;
+use App\Filament\Resources\SeasonResource\Pages\EditSeason;
+use App\Filament\Resources\SeasonResource\Pages\ListSeasons;
 use App\Filament\Resources\SeasonResource\RelationManagers\OwnershipGroupsRelationManager;
 use App\Filament\Resources\SeasonResource\RelationManagers\TeamsRelationManager;
 use App\Filament\Resources\TeamResource\RelationManagers\DriversRelationManager;
 use App\Models\Season;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -28,12 +31,12 @@ final class SeasonResource extends Resource
 
     protected static ?string $slug = 'seasons';
 
-    protected static ?string $navigationIcon = 'heroicon-o-calendar';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('year')
                     ->required()
                     ->integer(),
@@ -57,11 +60,11 @@ final class SeasonResource extends Resource
                 SelectFilter::make('Status')
                     ->options(SeasonStatus::class),
             ])
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
@@ -80,9 +83,9 @@ final class SeasonResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSeasons::route('/'),
-            'create' => Pages\CreateSeason::route('/create'),
-            'edit' => Pages\EditSeason::route('/{record}/edit'),
+            'index' => ListSeasons::route('/'),
+            'create' => CreateSeason::route('/create'),
+            'edit' => EditSeason::route('/{record}/edit'),
         ];
     }
 

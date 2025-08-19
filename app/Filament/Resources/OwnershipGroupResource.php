@@ -4,18 +4,21 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OwnershipGroupResource\Pages;
+use App\Filament\Resources\OwnershipGroupResource\Pages\CreateOwnershipGroup;
+use App\Filament\Resources\OwnershipGroupResource\Pages\EditOwnershipGroup;
+use App\Filament\Resources\OwnershipGroupResource\Pages\ListOwnershipGroups;
 use App\Filament\Resources\OwnershipGroupResource\RelationManagers\UsersRelationManager;
 use App\Models\OwnershipGroup;
 use App\Models\Season;
+use BackedEnum;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
@@ -28,12 +31,12 @@ final class OwnershipGroupResource extends Resource
 
     protected static ?string $slug = 'ownership-groups';
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Select::make('season_id')
                     ->label('Season')
                     ->options(Season::query()->orderByDesc('year')->pluck('year', 'id')),
@@ -73,11 +76,11 @@ final class OwnershipGroupResource extends Resource
                     ->relationship('season', 'Year'),
             ])
             ->filtersLayout(FiltersLayout::AboveContent)
-            ->actions([
+            ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
                 ]),
@@ -87,9 +90,9 @@ final class OwnershipGroupResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListOwnershipGroups::route('/'),
-            'create' => Pages\CreateOwnershipGroup::route('/create'),
-            'edit' => Pages\EditOwnershipGroup::route('/{record}/edit'),
+            'index' => ListOwnershipGroups::route('/'),
+            'create' => CreateOwnershipGroup::route('/create'),
+            'edit' => EditOwnershipGroup::route('/{record}/edit'),
         ];
     }
 
