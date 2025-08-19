@@ -1,12 +1,12 @@
+import tailwindcss from '@tailwindcss/vite';
 import vue from '@vitejs/plugin-vue';
 import laravel from 'laravel-vite-plugin';
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'vite';
 
 export default defineConfig({
     plugins: [
         laravel({
-            input: ['resources/js/app.ts'],
+            input: ['resources/js/app.ts', 'resources/css/filament/dashboard/theme.css'],
             ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),

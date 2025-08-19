@@ -87,6 +87,7 @@ final class DashboardPanelProvider extends PanelProvider
                             ->icon('discord'),
                     ])
                     ->showDivider(false)
-            );
+            )
+            ->viteTheme('resources/css/filament/dashboard/theme.css');
     }
 }

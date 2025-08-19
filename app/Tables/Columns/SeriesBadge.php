@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 final class SeriesBadge extends Column
 {
-    protected string $view = 'tables.columns.series-badge';
+    protected string $view = 'filament.tables.columns.series-badge';
 
     public function getState(): ?array
     {
