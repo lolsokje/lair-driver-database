@@ -99,9 +99,6 @@ final class DriversRelationManager extends RelationManager
                     ->width('1%')
                     ->alignCenter(),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
                 AttachAction::make()
                     ->hidden(fn () => ! $this->isOnTeamsPage())

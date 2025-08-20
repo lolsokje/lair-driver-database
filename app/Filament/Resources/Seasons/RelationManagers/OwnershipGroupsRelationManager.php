@@ -39,9 +39,6 @@ final class OwnershipGroupsRelationManager extends RelationManager
                 TextColumn::make('users.username')
                     ->label('Users'),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
             ])
             ->recordActions([

@@ -34,9 +34,6 @@ final class UsersRelationManager extends RelationManager
             ->columns([
                 TextColumn::make('username'),
             ])
-            ->filters([
-                //
-            ])
             ->headerActions([
                 AttachAction::make()
                     ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName'))

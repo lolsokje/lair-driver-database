@@ -48,9 +48,6 @@ final class UserResource extends Resource
 
                 IconColumn::make('admin'),
             ])
-            ->filters([
-                //
-            ])
             ->recordActions([
                 Impersonate::make()
                     ->label('')

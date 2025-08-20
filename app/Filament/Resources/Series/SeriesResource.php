@@ -62,9 +62,6 @@ final class SeriesResource extends Resource
 
                 TextColumn::make('simmedBy.username'),
             ])
-            ->filters([
-                //
-            ])
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
