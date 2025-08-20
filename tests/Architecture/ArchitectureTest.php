@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 use App\Models\User;
+use App\Providers\AppServiceProvider;
+use Filament\Tables\Enums\FiltersLayout;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\RedirectResponse;
@@ -41,6 +43,11 @@ arch('Illuminate\Http\RedirectResponse not used')
 arch('debug methods are not used')
     ->expect('App')
     ->not->toUse(['die', 'dd', 'dump']);
+
+arch('only use default FiltersLayout configuration')
+    ->expect('App')
+    ->not->toUse(FiltersLayout::class)
+    ->ignoring(AppServiceProvider::class);
 
 arch()->preset()->php();
 arch()->preset()->security();

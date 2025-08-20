@@ -20,7 +20,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -75,7 +74,6 @@ final class OwnershipGroupResource extends Resource
                     ->label('Season')
                     ->relationship('season', 'Year'),
             ])
-            ->filtersLayout(FiltersLayout::AboveContent)
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),

@@ -10,7 +10,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
@@ -51,7 +50,6 @@ final class TeamsRelationManager extends RelationManager
 
                 SelectFilter::make('season')
                     ->relationship('season', 'year'),
-            ])
-            ->filtersLayout(FiltersLayout::AboveContent);
+            ]);
     }
 }

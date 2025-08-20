@@ -19,7 +19,6 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ColorColumn;
 use Filament\Tables\Columns\ColumnGroup;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -119,7 +118,6 @@ final class TeamResource extends Resource
                         return $query->orderBy('name');
                     }),
             ])
-            ->filtersLayout(FiltersLayout::AboveContent)
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),

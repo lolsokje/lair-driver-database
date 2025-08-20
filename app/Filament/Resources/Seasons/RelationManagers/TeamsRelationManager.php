@@ -14,7 +14,6 @@ use Filament\Actions\EditAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -61,7 +60,7 @@ final class TeamsRelationManager extends RelationManager
                 SelectFilter::make('ownershipGroup')
                     ->relationship('ownershipGroup', 'name', modifyQueryUsing: fn (Builder $query) => $query->orderBy('name'))
                     ->native(false),
-            ], layout: FiltersLayout::AboveContent)
+            ])
             ->headerActions([
                 CreateAction::make(),
             ])

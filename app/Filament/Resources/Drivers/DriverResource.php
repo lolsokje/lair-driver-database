@@ -20,7 +20,6 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Enums\FiltersLayout;
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
@@ -136,7 +135,6 @@ final class DriverResource extends Resource
 
                 TernaryFilter::make('retired'),
             ])
-            ->filtersLayout(FiltersLayout::AboveContent)
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make()

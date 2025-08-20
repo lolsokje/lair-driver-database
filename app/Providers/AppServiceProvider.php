@@ -8,6 +8,8 @@ use Carbon\CarbonImmutable;
 use Filament\Schemas\Components\Fieldset;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
+use Filament\Tables\Enums\FiltersLayout;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
@@ -85,5 +87,8 @@ final class AppServiceProvider extends ServiceProvider
 
         Section::configureUsing(fn (Section $section) => $section
             ->columnSpanFull());
+
+        Table::configureUsing(fn (Table $table) => $table
+            ->filtersLayout(FiltersLayout::AboveContent));
     }
 }
