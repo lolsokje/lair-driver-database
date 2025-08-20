@@ -18,6 +18,7 @@ use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Query\Builder as QueryBuilder;
@@ -52,6 +53,11 @@ final class DriversRelationManager extends RelationManager
                         'season',
                     ]);
             })
+            ->defaultSort(function (Builder $query) {
+                return $query
+                    ->orderBy('series_id')
+                    ->orderBy('given_name');
+            })
             ->recordTitleAttribute('given_name')
             ->columns([
                 TextColumn::make('driver_sheet_id')
@@ -67,6 +73,7 @@ final class DriversRelationManager extends RelationManager
                     ->state(fn (Driver $driver) => $driver->fullName()),
 
                 SeriesBadge::make('series.name')
+                    ->sortable()
                     ->width('1%'),
 
                 TextColumn::make('season.year')
@@ -81,6 +88,7 @@ final class DriversRelationManager extends RelationManager
                     })
                     ->width('1%')
                     ->alignCenter()
+                    ->sortable()
                     ->hidden(fn () => $this->isOnTeamsPage()),
 
                 TextColumn::make('rating')
@@ -98,6 +106,10 @@ final class DriversRelationManager extends RelationManager
                     ->boolean()
                     ->width('1%')
                     ->alignCenter(),
+            ])
+            ->filters([
+                SelectFilter::make('series')
+                    ->relationship('series', 'name'),
             ])
             ->headerActions([
                 AttachAction::make()
