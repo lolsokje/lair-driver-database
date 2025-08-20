@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Teams\RelationManagers;
 
-use App\Filament\Resources\Teams\RelationManagers\DriversRelationManager;
 use App\Models\Driver;
 use App\Models\Season;
 use App\Models\Team;
 use App\Tables\Columns\SeriesBadge;
 use Filament\Actions\AttachAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DetachAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Checkbox;
@@ -161,11 +158,6 @@ final class DriversRelationManager extends RelationManager
                     ->hidden(fn () => ! $this->isOnTeamsPage()),
                 DetachAction::make()
                     ->hidden(fn () => ! $this->isOnTeamsPage()),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

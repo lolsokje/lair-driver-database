@@ -11,9 +11,7 @@ use App\Filament\Resources\OwnershipGroups\RelationManagers\UsersRelationManager
 use App\Models\OwnershipGroup;
 use App\Models\Season;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -77,11 +75,6 @@ final class OwnershipGroupResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

@@ -6,8 +6,6 @@ namespace App\Filament\Resources\OwnershipGroups\RelationManagers;
 
 use App\Models\OwnershipGroup;
 use Filament\Actions\AttachAction;
-use Filament\Actions\BulkActionGroup;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\DetachAction;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Schemas\Schema;
@@ -64,11 +62,6 @@ final class UsersRelationManager extends RelationManager
             ->recordActions([
                 DetachAction::make()
                     ->after(fn (Component $livewire) => $livewire->dispatch('refreshOwnershipGroupName')),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 }

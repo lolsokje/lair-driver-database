@@ -13,9 +13,7 @@ use App\Filament\Resources\Seasons\RelationManagers\TeamsRelationManager;
 use App\Filament\Resources\Teams\RelationManagers\DriversRelationManager;
 use App\Models\Season;
 use BackedEnum;
-use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -63,11 +61,6 @@ final class SeasonResource extends Resource
             ->recordActions([
                 EditAction::make(),
                 DeleteAction::make(),
-            ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
             ]);
     }
 
