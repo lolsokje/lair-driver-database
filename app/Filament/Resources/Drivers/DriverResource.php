@@ -9,6 +9,7 @@ use App\Filament\Resources\Drivers\Pages\EditDriver;
 use App\Filament\Resources\Drivers\Pages\ListDrivers;
 use App\Filament\Resources\Drivers\RelationManagers\TeamsRelationManager;
 use App\Models\Driver;
+use App\Models\Season;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -59,6 +60,11 @@ final class DriverResource extends Resource
         $minDriverRating = Driver::query()->min('rating');
         $maxDriverRating = Driver::query()->max('rating');
 
+        $latestSeason = Season::query()
+            ->orderBy('year', 'DESC')
+            ->first()
+            ->value('year');
+
         return $table
             ->modifyQueryUsing(function (Builder $query) {
                 return $query
@@ -81,6 +87,11 @@ final class DriverResource extends Resource
                 TextColumn::make('rating')
                     ->sortable()
                     ->copyable()
+                    ->width('1%')
+                    ->alignCenter(),
+
+                TextColumn::make('age')
+                    ->state(fn (Driver $record) => $record->ageForSeason($latestSeason))
                     ->width('1%')
                     ->alignCenter(),
 

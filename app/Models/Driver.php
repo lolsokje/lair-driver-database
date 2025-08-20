@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -17,6 +18,13 @@ final class Driver extends Model
     public function fullName(): string
     {
         return "$this->given_name $this->family_name";
+    }
+
+    public function ageForSeason(int $year): float
+    {
+        $cutoff = CarbonImmutable::createFromFormat('Y-m-d', "{$year}-03-01");
+
+        return floor($this->date_of_birth->diffInYears($cutoff));
     }
 
     public function teams(): BelongsToMany
