@@ -117,7 +117,7 @@ final class DriversRelationManager extends RelationManager
                     })
                     ->preloadRecordSelect()
                     ->recordTitle(fn (Driver $record) => $record->fullName())
-                    ->form(fn (AttachAction $action) => [
+                    ->schema(fn (AttachAction $action) => [
                         $action->getRecordSelect()
                             ->searchable(['given_name', 'family_name'])
                             ->required(),
