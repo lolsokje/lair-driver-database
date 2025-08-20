@@ -15,22 +15,22 @@ final class SeasonPolicy
 
     public function viewAny(User $user): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function view(User $user, Season $season): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function create(User $user): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function update(User $user, Season $season): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function delete(User $user, Season $season): bool
@@ -40,11 +40,16 @@ final class SeasonPolicy
 
     public function restore(User $user, Season $season): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function forceDelete(User $user, Season $season): bool
     {
         return $this->delete($user, $season);
+    }
+
+    private function check(User $user): bool
+    {
+        return $user->admin;
     }
 }

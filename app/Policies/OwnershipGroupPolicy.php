@@ -14,12 +14,12 @@ final class OwnershipGroupPolicy
 
     public function viewAny(User $user): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function view(User $user, OwnershipGroup $ownershipGroup): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function create(User $user): bool

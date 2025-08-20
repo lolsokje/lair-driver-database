@@ -14,12 +14,12 @@ final class SeriesPolicy
 
     public function viewAny(User $user): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function view(User $user, Series $series): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function create(User $user): bool

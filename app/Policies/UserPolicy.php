@@ -13,31 +13,31 @@ final class UserPolicy
 
     public function viewAny(User $user): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function view(User $user, User $model): bool
     {
-        return true;
+        return $this->check($user);
     }
 
     public function create(User $user): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function update(User $user, User $model): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function delete(User $user, User $model): bool
     {
-        if (! $user->admin) {
+        if (! $this->check($user)) {
             return false;
         }
 
-        if ($model->admin) {
+        if ($this->check($model)) {
             return false;
         }
 
@@ -46,11 +46,16 @@ final class UserPolicy
 
     public function restore(User $user, User $model): bool
     {
-        return $user->admin;
+        return $this->check($user);
     }
 
     public function forceDelete(User $user, User $model): bool
     {
         return $this->delete($user, $model);
+    }
+
+    private function check(User $user): bool
+    {
+        return $user->admin;
     }
 }

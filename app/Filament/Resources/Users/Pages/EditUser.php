@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Users\Pages;
 
+use App\Filament\Resources\Drivers\Pages\ListDrivers;
 use App\Filament\Resources\Users\UserResource;
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
@@ -19,7 +20,7 @@ final class EditUser extends EditRecord
             DeleteAction::make(),
             Impersonate::make()
                 ->record($this->getRecord())
-                ->redirectTo(ListUsers::getUrl()),
+                ->redirectTo(ListDrivers::getUrl()),
         ];
     }
 }
