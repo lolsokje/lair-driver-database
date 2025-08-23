@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Drivers;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\Drivers\Pages\CreateDriver;
 use App\Filament\Resources\Drivers\Pages\EditDriver;
 use App\Filament\Resources\Drivers\Pages\ListDrivers;
@@ -25,6 +26,7 @@ use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use UnitEnum;
 
 final class DriverResource extends Resource
 {
@@ -33,6 +35,8 @@ final class DriverResource extends Resource
     protected static ?string $slug = 'drivers';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-users';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::TEAMS_AND_DRIVERS;
 
     public static function form(Schema $schema): Schema
     {

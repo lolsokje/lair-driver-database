@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Teams;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\Teams\Pages\CreateTeam;
 use App\Filament\Resources\Teams\Pages\EditTeam;
 use App\Filament\Resources\Teams\Pages\ListTeams;
@@ -23,6 +24,7 @@ use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use UnitEnum;
 
 final class TeamResource extends Resource
 {
@@ -31,6 +33,8 @@ final class TeamResource extends Resource
     protected static ?string $slug = 'teams';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-rectangle-stack';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::TEAMS_AND_DRIVERS;
 
     protected static ?string $recordTitleAttribute = 'full_name';
 

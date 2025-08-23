@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\OwnershipGroups;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\OwnershipGroups\Pages\CreateOwnershipGroup;
 use App\Filament\Resources\OwnershipGroups\Pages\EditOwnershipGroup;
 use App\Filament\Resources\OwnershipGroups\Pages\ListOwnershipGroups;
@@ -21,6 +22,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use UnitEnum;
 
 final class OwnershipGroupResource extends Resource
 {
@@ -29,6 +31,8 @@ final class OwnershipGroupResource extends Resource
     protected static ?string $slug = 'ownership-groups';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::SETTINGS;
 
     public static function form(Schema $schema): Schema
     {

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Series;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\Series\Pages\CreateSeries;
 use App\Filament\Resources\Series\Pages\EditSeries;
 use App\Filament\Resources\Series\Pages\ListSeries;
@@ -20,6 +21,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use UnitEnum;
 
 final class SeriesResource extends Resource
 {
@@ -28,6 +30,8 @@ final class SeriesResource extends Resource
     protected static ?string $slug = 'series';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calculator';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::SETTINGS;
 
     public static function form(Schema $schema): Schema
     {

@@ -89,6 +89,7 @@ final class DashboardPanelProvider extends PanelProvider
                     ])
                     ->showDivider(false)
             )
+            ->collapsibleNavigationGroups(false)
             ->viteTheme('resources/css/filament/dashboard/theme.css');
     }
 }

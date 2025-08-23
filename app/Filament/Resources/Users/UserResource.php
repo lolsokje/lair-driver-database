@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Users;
 
+use App\Enums\NavigationGroup;
 use App\Filament\Resources\Drivers\Pages\ListDrivers;
 use App\Filament\Resources\Users\Pages\CreateUser;
 use App\Filament\Resources\Users\Pages\EditUser;
@@ -20,6 +21,7 @@ use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use STS\FilamentImpersonate\Actions\Impersonate;
+use UnitEnum;
 
 final class UserResource extends Resource
 {
@@ -28,6 +30,8 @@ final class UserResource extends Resource
     protected static ?string $slug = 'users';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-user';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::OTHERS;
 
     public static function form(Schema $schema): Schema
     {

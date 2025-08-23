@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Seasons;
 
+use App\Enums\NavigationGroup;
 use App\Enums\SeasonStatus;
 use App\Filament\Resources\Seasons\Pages\CreateSeason;
 use App\Filament\Resources\Seasons\Pages\EditSeason;
@@ -22,6 +23,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use UnitEnum;
 
 final class SeasonResource extends Resource
 {
@@ -30,6 +32,8 @@ final class SeasonResource extends Resource
     protected static ?string $slug = 'seasons';
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
+
+    protected static string|UnitEnum|null $navigationGroup = NavigationGroup::SETTINGS;
 
     public static function form(Schema $schema): Schema
     {
