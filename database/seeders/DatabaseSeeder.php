@@ -16,6 +16,7 @@ final class DatabaseSeeder extends Seeder
             DriverSeeder::class,
             TeamSeeder::class,
             DriverTeamSeeder::class,
+            DevelopmentSettingsSeeder::class,
         ]);
     }
 }

@@ -11,6 +11,7 @@ enum NavigationGroup implements HasLabel
     case TEAMS_AND_DRIVERS;
     case SETTINGS;
     case OTHERS;
+    case DEVELOPMENT;
 
     public function getLabel(): string
     {
@@ -18,6 +19,7 @@ enum NavigationGroup implements HasLabel
             self::TEAMS_AND_DRIVERS => 'Teams and Drivers',
             self::SETTINGS => 'Settings',
             self::OTHERS => 'Others',
+            self::DEVELOPMENT => 'Development',
         };
     }
 }
