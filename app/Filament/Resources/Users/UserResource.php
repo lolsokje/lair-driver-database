@@ -16,6 +16,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use STS\FilamentImpersonate\Actions\Impersonate;
@@ -33,6 +34,8 @@ final class UserResource extends Resource
         return $schema
             ->components([
                 TextInput::make('username')
+                    ->disabled(fn (?User $record) => $record !== null)
+                    ->helperText(fn (?User $record) => $record !== null ? 'The username is updated whenever the user logs in' : '')
                     ->required(),
 
                 TextInput::make('discord_id')
@@ -44,9 +47,16 @@ final class UserResource extends Resource
     {
         return $table
             ->columns([
+                ImageColumn::make('avatar')
+                    ->label('')
+                    ->width('1%')
+                    ->circular(),
+
                 TextColumn::make('username'),
 
-                IconColumn::make('admin'),
+                IconColumn::make('admin')
+                    ->alignCenter()
+                    ->width('1%'),
             ])
             ->recordActions([
                 Impersonate::make()

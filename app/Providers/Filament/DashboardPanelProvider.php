@@ -80,7 +80,8 @@ final class DashboardPanelProvider extends PanelProvider
                     })
                     ->resolveUserUsing(function (string $provider, SocialiteUserContract $oauthUser, FilamentSocialitePlugin $plugin) {
                         return User::query()->where('discord_id', $oauthUser->getId())->first();
-                    })->socialiteUserModelClass(User::class)
+                    })
+                    ->socialiteUserModelClass(User::class)
                     ->providers([
                         Provider::make('discord')
                             ->label('Discord')

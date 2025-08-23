@@ -26,7 +26,23 @@ final class User extends Authenticatable implements FilamentSocialiteUser, Filam
 
     public static function findForProvider(string $provider, SocialiteUserContract $oauthUser): ?self
     {
-        return self::query()->where('discord_id', $oauthUser->getId())->first();
+        $user = self::query()->where('discord_id', $oauthUser->getId())->first();
+
+        if (! $user) {
+            return null;
+        }
+
+        if ($user->username !== $oauthUser->getNickname()) {
+            $user->username = $oauthUser->getNickname();
+        }
+
+        if ($user->avatar !== $oauthUser->getAvatar()) {
+            $user->avatar = $oauthUser->getAvatar();
+        }
+
+        $user->save();
+
+        return $user;
     }
 
     public static function createForProvider(string $provider, SocialiteUserContract $oauthUser, AuthenticatableContract $user): FilamentSocialiteUser
