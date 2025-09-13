@@ -76,10 +76,15 @@ final class DriversRelationManager extends RelationManager
 
                 SeriesBadge::make('series')
                     ->state(function (Driver $record) {
-                        /** @var Season $season */
-                        $season = $this->getOwnerRecord();
+                        /** @var Team|Season $ownerRecord */
+                        $ownerRecord = $this->getOwnerRecord();
+
+                        if ($ownerRecord instanceof Team) {
+                            return $ownerRecord->series;
+                        }
+
                         /** @var Team $currentTeam */
-                        $currentTeam = $record->teams->where('season_id', $season->id)->first();
+                        $currentTeam = $record->teams->where('season_id', $ownerRecord->id)->first();
 
                         return $currentTeam->series;
                     })
