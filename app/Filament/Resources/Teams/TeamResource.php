@@ -57,6 +57,7 @@ final class TeamResource extends Resource
                 $query->withAggregate('season', 'year')
                     ->withAggregate('series', 'name')
                     ->with([
+                        'series',
                         'drivers',
                         'ownershipGroup' => [
                             'users',
@@ -73,7 +74,7 @@ final class TeamResource extends Resource
                     ->alignCenter()
                     ->width('1%'),
 
-                SeriesBadge::make('series.name')
+                SeriesBadge::make('series')
                     ->width('1%'),
 
                 TextColumn::make('season.year')

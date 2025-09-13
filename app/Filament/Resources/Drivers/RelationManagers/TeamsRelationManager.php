@@ -32,7 +32,7 @@ final class TeamsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('full_name')
             ->columns([
-                SeriesBadge::make('series.name')
+                SeriesBadge::make('series')
                     ->width('1%'),
 
                 TextColumn::make('season.year')

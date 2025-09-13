@@ -40,9 +40,13 @@ final class TeamsRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn (Builder $query) => $query
+                ->with([
+                    'series',
+                ]))
             ->recordTitleAttribute('full_name')
             ->columns([
-                SeriesBadge::make('series.name')
+                SeriesBadge::make('series')
                     ->width('1%'),
 
                 TextColumn::make('full_name')
