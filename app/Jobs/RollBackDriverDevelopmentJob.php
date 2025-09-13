@@ -58,6 +58,8 @@ final class RollBackDriverDevelopmentJob implements ShouldQueue
             $seasonDriver->update([
                 'rating' => $result->old_rating,
             ]);
+
+            $result->markPending();
         }
 
         $this->developmentRound->markRolledBack();

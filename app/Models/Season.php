@@ -6,12 +6,17 @@ namespace App\Models;
 
 use App\Enums\DevelopmentRoundStatus;
 use App\Enums\SeasonStatus;
+use Database\Factories\SeasonFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 final class Season extends Model
 {
+    /** @use HasFactory<SeasonFactory> */
+    use HasFactory;
+
     protected $casts = [
         'status' => SeasonStatus::class,
     ];

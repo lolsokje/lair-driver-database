@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Jobs;
 
+use App\Enums\DevelopmentResultStatus;
 use App\Models\DevelopmentResult;
 use App\Models\DevelopmentRound;
 use App\Models\Driver;
@@ -43,11 +44,17 @@ final class ConfirmDriverDevelopmentJob implements ShouldQueue
 
         /** @var DevelopmentResult $result */
         foreach ($this->developmentRound->developmentResults as $result) {
+            if ($result->status === DevelopmentResultStatus::APPLIED) {
+                continue;
+            }
+
             $driver = $result->driver;
             /** @var ?Driver $seasonDriver */
             $seasonDriver = $driversInSeason->where('id', $driver->id)->first();
 
             if (! $seasonDriver) {
+                $result->markFailed();
+
                 continue;
             }
 
@@ -60,6 +67,8 @@ final class ConfirmDriverDevelopmentJob implements ShouldQueue
             $seasonDriver->update([
                 'rating' => $newRating,
             ]);
+
+            $result->markApplied();
         }
 
         $this->developmentRound->markConfirmed();

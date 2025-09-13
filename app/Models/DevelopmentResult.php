@@ -5,12 +5,17 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Enums\DevelopmentResultStatus;
+use Database\Factories\DevelopmentResultFactory;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 final class DevelopmentResult extends Model
 {
+    /** @use HasFactory<DevelopmentResultFactory> */
+    use HasFactory;
+
     protected $casts = [
         'status' => DevelopmentResultStatus::class,
     ];
@@ -65,6 +70,37 @@ final class DevelopmentResult extends Model
         }
 
         return Heroicon::Equals;
+    }
+
+    public function markApplied(): self
+    {
+        if ($this->status === DevelopmentResultStatus::PENDING) {
+            $this->update([
+                'status' => DevelopmentResultStatus::APPLIED,
+            ]);
+        }
+
+        return $this;
+    }
+
+    public function markFailed(): self
+    {
+        $this->update([
+            'status' => DevelopmentResultStatus::FAILED,
+        ]);
+
+        return $this;
+    }
+
+    public function markPending(): self
+    {
+        if ($this->status === DevelopmentResultStatus::APPLIED) {
+            $this->update([
+                'status' => DevelopmentResultStatus::PENDING,
+            ]);
+        }
+
+        return $this;
     }
 
     private function ratingIncreased(): bool

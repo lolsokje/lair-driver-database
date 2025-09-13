@@ -9,6 +9,8 @@ use App\Enums\SeasonStatus;
 use App\Models\DevelopmentRound;
 use App\Models\Driver;
 use App\Models\Season;
+use App\Models\Series;
+use App\Models\Team;
 use App\Services\DriverDevelopmentService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -57,7 +59,9 @@ final class PerformDriverDevelopmentJob implements ShouldQueue
                 $this->drivers->each(function (Driver $driver) use ($driverDevelopmentService) {
                     $age = $driver->ageForSeason($this->season->year);
 
+                    /** @var Team|null $team */
                     $team = $driver->teams->where('season_id', $this->season->id)->first();
+                    /** @var Series|null $series */
                     $series = $team?->series;
 
                     $ageRange = $driverDevelopmentService->getAgeRangeForAge($age);

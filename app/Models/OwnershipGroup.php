@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Builders\OwnershipGroupBuilder;
+use Database\Factories\OwnershipGroupFactory;
 use Illuminate\Database\Eloquent\Attributes\UseEloquentBuilder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -14,6 +16,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 #[UseEloquentBuilder(OwnershipGroupBuilder::class)]
 final class OwnershipGroup extends Model
 {
+    /** @use HasFactory<OwnershipGroupFactory> */
+    use HasFactory;
+
     public function season(): BelongsTo
     {
         return $this->belongsTo(Season::class);

@@ -5,11 +5,16 @@ declare(strict_types=1);
 namespace App\Models;
 
 use Carbon\CarbonImmutable;
+use Database\Factories\DriverFactory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 final class Driver extends Model
 {
+    /** @use HasFactory<DriverFactory> */
+    use HasFactory;
+
     protected $casts = [
         'date_of_birth' => 'date',
         'retired' => 'boolean',
