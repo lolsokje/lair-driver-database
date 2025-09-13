@@ -70,9 +70,9 @@ test('returns the correct dev range', function (
     [40, 40, 49],
     [45, 40, 49],
     [49, 40, 49],
-    [50, 50, 59],
-    [55, 50, 59],
-    [59, 50, 59],
+    [50, 50, 99],
+    [55, 50, 99],
+    [59, 50, 99],
 ]);
 
 test('throws an exception when no dev range can be found', function () {
@@ -80,7 +80,7 @@ test('throws an exception when no dev range can be found', function () {
 
     $this->expectException(ItemNotFoundException::class);
 
-    $service->getDevelopmentRangeForRating(AgeRange::first(), 70);
+    $service->getDevelopmentRangeForRating(AgeRange::first(), 100);
 });
 
 test('returns a valid development number', function () {
