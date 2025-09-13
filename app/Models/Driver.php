@@ -20,11 +20,11 @@ final class Driver extends Model
         return "$this->given_name $this->family_name";
     }
 
-    public function ageForSeason(int $year): float
+    public function ageForSeason(int $year): int
     {
         $cutoff = CarbonImmutable::createFromFormat('Y-m-d', "{$year}-03-01");
 
-        return floor($this->date_of_birth->diffInYears($cutoff));
+        return (int) floor($this->date_of_birth->diffInYears($cutoff));
     }
 
     public function teams(): BelongsToMany

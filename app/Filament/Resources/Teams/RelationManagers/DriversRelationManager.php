@@ -49,7 +49,9 @@ final class DriversRelationManager extends RelationManager
             ->modifyQueryUsing(function (Builder $query) {
                 return $query
                     ->with([
-                        'teams',
+                        'teams' => [
+                            'series',
+                        ],
                         'season',
                     ]);
             })
@@ -72,7 +74,15 @@ final class DriversRelationManager extends RelationManager
                     ->copyable()
                     ->state(fn (Driver $driver) => $driver->fullName()),
 
-                SeriesBadge::make('series.name')
+                SeriesBadge::make('series')
+                    ->state(function (Driver $record) {
+                        /** @var Season $season */
+                        $season = $this->getOwnerRecord();
+                        /** @var Team $currentTeam */
+                        $currentTeam = $record->teams->where('season_id', $season->id)->first();
+
+                        return $currentTeam->series;
+                    })
                     ->sortable()
                     ->width('1%'),
 

@@ -24,7 +24,8 @@ final class EditSeason extends EditRecord
 
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        $status = SeasonStatus::from((int) $data['status']);
+        /** @var SeasonStatus $status */
+        $status = $data['status'];
 
         if ($status === SeasonStatus::ACTIVE) {
             Season::query()

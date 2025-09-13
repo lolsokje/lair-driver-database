@@ -62,7 +62,8 @@ final class SeriesResource extends Resource
     {
         return $table
             ->columns([
-                SeriesBadge::make('name'),
+                SeriesBadge::make('name')
+                    ->state(fn (Series $record) => $record),
 
                 TextColumn::make('simmedBy.username'),
             ])
