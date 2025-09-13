@@ -40,6 +40,8 @@ final class User extends Authenticatable implements FilamentSocialiteUser, Filam
             $user->avatar = $oauthUser->getAvatar();
         }
 
+        $user->touch('last_login_at');
+
         $user->save();
 
         return $user;
@@ -89,6 +91,7 @@ final class User extends Authenticatable implements FilamentSocialiteUser, Filam
     {
         return [
             'admin' => 'boolean',
+            'last_login_at' => 'immutable_datetime',
         ];
     }
 }

@@ -58,6 +58,11 @@ final class UserResource extends Resource
 
                 TextColumn::make('username'),
 
+                TextColumn::make('last_login_at')
+                    ->state(fn (User $record) => $record->last_login_at?->format('F jS, Y \a\t H:i'))
+                    ->alignEnd()
+                    ->width('1%'),
+
                 IconColumn::make('admin')
                     ->alignCenter()
                     ->width('1%'),
