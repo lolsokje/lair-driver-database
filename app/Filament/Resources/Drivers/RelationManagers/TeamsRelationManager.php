@@ -12,6 +12,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 final class TeamsRelationManager extends RelationManager
 {
@@ -31,6 +32,7 @@ final class TeamsRelationManager extends RelationManager
     {
         return $table
             ->recordTitleAttribute('full_name')
+            ->modifyQueryUsing(fn (Builder $query) => $query->with('series'))
             ->columns([
                 SeriesBadge::make('series')
                     ->width('1%'),

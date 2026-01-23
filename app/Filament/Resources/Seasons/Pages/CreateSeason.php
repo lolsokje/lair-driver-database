@@ -23,7 +23,8 @@ final class CreateSeason extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        $status = SeasonStatus::from((int) $data['status']);
+        /** @var SeasonStatus $status */
+        $status = $data['status'];
 
         if ($status === SeasonStatus::ACTIVE) {
             Season::query()

@@ -43,8 +43,8 @@ final class OwnershipGroupResource extends Resource
                     ->options(Season::query()->orderByDesc('year')->pluck('year', 'id')),
 
                 TextInput::make('name')
-                    ->disabled(fn (OwnershipGroup $group) => $group->users->count() > 0)
-                    ->helperText(fn (OwnershipGroup $group) => $group->users->count() > 0 ? 'The name is automatically generated based on attached users' : '')
+                    ->disabled(fn (?OwnershipGroup $group) => $group?->users->count() > 0)
+                    ->helperText(fn (?OwnershipGroup $group) => $group?->users->count() > 0 ? 'The name is automatically generated based on attached users' : '')
                     ->required(),
             ]);
     }
