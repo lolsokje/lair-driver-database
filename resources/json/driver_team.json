@@ -28,13 +28,6 @@
         "driver_sheet_id": null
     },
     {
-        "team_name": "Ferrari",
-        "series_name": "FIA F1",
-        "given_name": "Kimi",
-        "family_name": "Räikkönen",
-        "driver_sheet_id": null
-    },
-    {
         "team_name": "Red Bull",
         "series_name": "FIA F1",
         "given_name": "Daniel",
@@ -147,13 +140,6 @@
         "driver_sheet_id": null
     },
     {
-        "team_name": "Manor",
-        "series_name": "FIA F1",
-        "given_name": "Alexander",
-        "family_name": "Rossi",
-        "driver_sheet_id": null
-    },
-    {
         "team_name": "Toyota",
         "series_name": "FIA F1",
         "given_name": "Kamui",
@@ -182,13 +168,6 @@
         "driver_sheet_id": null
     },
     {
-        "team_name": "Alfa Romeo",
-        "series_name": "FIA F1",
-        "given_name": "Marcus",
-        "family_name": "Ericsson",
-        "driver_sheet_id": null
-    },
-    {
         "team_name": "Gresini",
         "series_name": "FIA F1",
         "given_name": "Louis",
@@ -200,13 +179,6 @@
         "series_name": "FIA F1",
         "given_name": "Carlos",
         "family_name": "Sainz JR",
-        "driver_sheet_id": null
-    },
-    {
-        "team_name": "Gresini",
-        "series_name": "FIA F1",
-        "given_name": "Daniil",
-        "family_name": "Kvyat",
         "driver_sheet_id": null
     },
     {
@@ -263,7 +235,7 @@
         "series_name": "FIA F2",
         "given_name": "Naoki",
         "family_name": "Yamamoto",
-        "driver_sheet_id": "18"
+        "driver_sheet_id": null
     },
     {
         "team_name": "Prema",
@@ -396,13 +368,6 @@
         "series_name": "FIA F2",
         "given_name": "Callum",
         "family_name": "Ilott",
-        "driver_sheet_id": null
-    },
-    {
-        "team_name": "Charouz",
-        "series_name": "FIA F2",
-        "given_name": "Marvin",
-        "family_name": "Kirchhöfer",
         "driver_sheet_id": null
     },
     {
@@ -637,17 +602,24 @@
         "driver_sheet_id": "19"
     },
     {
+        "team_name": "Raybrig Kunimitsu Honda",
+        "series_name": "WTCC",
+        "given_name": "Felix",
+        "family_name": "Rosenqvist",
+        "driver_sheet_id": "18"
+    },
+    {
         "team_name": "BWT Mucke Motorsport",
         "series_name": "WTCC",
-        "given_name": "Jim",
-        "family_name": "Pla",
+        "given_name": "Marvin",
+        "family_name": "Kirchhöfer",
         "driver_sheet_id": "13"
     },
     {
         "team_name": "BWT Mucke Motorsport",
         "series_name": "WTCC",
-        "given_name": "Jenson",
-        "family_name": "Button",
+        "given_name": "Thierry",
+        "family_name": "Neuville",
         "driver_sheet_id": "14"
     },
     {
@@ -667,6 +639,13 @@
     {
         "team_name": "Ecurie Ecosse",
         "series_name": "WTCC",
+        "given_name": "Alexander",
+        "family_name": "Rossi",
+        "driver_sheet_id": "9"
+    },
+    {
+        "team_name": "Ecurie Ecosse",
+        "series_name": "WTCC",
         "given_name": "Robert",
         "family_name": "Kubica",
         "driver_sheet_id": "7"
@@ -679,13 +658,6 @@
         "driver_sheet_id": "8"
     },
     {
-        "team_name": "Ecurie Ecosse",
-        "series_name": "WTCC",
-        "given_name": "Jamie",
-        "family_name": "Chadwick",
-        "driver_sheet_id": "9"
-    },
-    {
         "team_name": "Zengo Motorsport",
         "series_name": "WTCC",
         "given_name": "Norbert",
@@ -695,16 +667,16 @@
     {
         "team_name": "Zengo Motorsport",
         "series_name": "WTCC",
-        "given_name": "Nico",
-        "family_name": "Müller",
-        "driver_sheet_id": "35"
+        "given_name": "Tom",
+        "family_name": "Dillmann",
+        "driver_sheet_id": "36"
     },
     {
         "team_name": "Zengo Motorsport",
         "series_name": "WTCC",
-        "given_name": "Tom",
-        "family_name": "Dillmann",
-        "driver_sheet_id": "36"
+        "given_name": "Timo",
+        "family_name": "Schneider",
+        "driver_sheet_id": "35"
     },
     {
         "team_name": "JDC-Miller Motorsport",
@@ -723,29 +695,43 @@
     {
         "team_name": "Team WRT",
         "series_name": "WTCC",
+        "given_name": "Marcus",
+        "family_name": "Ericsson",
+        "driver_sheet_id": "37"
+    },
+    {
+        "team_name": "Team WRT",
+        "series_name": "WTCC",
         "given_name": "Kuba",
         "family_name": "Smiechowski",
         "driver_sheet_id": "39"
     },
     {
-        "team_name": "Lukoil SUNRED Engineering",
+        "team_name": "Team WRT",
+        "series_name": "WTCC",
+        "given_name": "Pato",
+        "family_name": "O'Ward",
+        "driver_sheet_id": "38"
+    },
+    {
+        "team_name": "Repsol SUNRED Engineering",
         "series_name": "WTCC",
         "given_name": "Adderly",
         "family_name": "Fong",
         "driver_sheet_id": "20"
     },
     {
-        "team_name": "Lukoil SUNRED Engineering",
+        "team_name": "Repsol SUNRED Engineering",
         "series_name": "WTCC",
         "given_name": "Kevin",
         "family_name": "Korjus",
         "driver_sheet_id": "21"
     },
     {
-        "team_name": "Lukoil SUNRED Engineering",
+        "team_name": "Repsol SUNRED Engineering",
         "series_name": "WTCC",
-        "given_name": "Sarah",
-        "family_name": "Bovy",
+        "given_name": "Eddie",
+        "family_name": "Cheever III",
         "driver_sheet_id": "22"
     },
     {
@@ -793,8 +779,8 @@
     {
         "team_name": "Mission Winnow FDM-ART Racing",
         "series_name": "WTCC",
-        "given_name": "José Maria",
-        "family_name": "Lopez",
+        "given_name": "Kimi",
+        "family_name": "Räikkönen",
         "driver_sheet_id": "4"
     },
     {
@@ -814,16 +800,16 @@
     {
         "team_name": "Kaspersky G-Drive Racing",
         "series_name": "WTCC",
-        "given_name": "Roman",
-        "family_name": "Rusinov",
-        "driver_sheet_id": "10"
+        "given_name": "Daniil",
+        "family_name": "Kvyat",
+        "driver_sheet_id": "11"
     },
     {
         "team_name": "Kaspersky G-Drive Racing",
         "series_name": "WTCC",
-        "given_name": "Vitaly",
-        "family_name": "Petrov",
-        "driver_sheet_id": "11"
+        "given_name": "Roman",
+        "family_name": "Rusinov",
+        "driver_sheet_id": "10"
     },
     {
         "team_name": "Kaspersky G-Drive Racing",
