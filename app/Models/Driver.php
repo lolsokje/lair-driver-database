@@ -42,6 +42,16 @@ final class Driver extends Model
             ]);
     }
 
+    public function teamForSeason(Season $season): ?Team
+    {
+        /** @var Team|null $team */
+        $team = $this->teams()
+            ->where('teams.season_id', $season->id)
+            ->first();
+
+        return $team;
+    }
+
     public function series(): BelongsToMany
     {
         return $this->belongsToMany(Series::class, 'driver_team');

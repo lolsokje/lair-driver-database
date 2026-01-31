@@ -11,6 +11,7 @@ use App\Filament\Resources\Drivers\Pages\ListDrivers;
 use App\Filament\Resources\Drivers\RelationManagers\TeamsRelationManager;
 use App\Models\Driver;
 use App\Models\Season;
+use App\Tables\Columns\SeriesBadge;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -23,6 +24,7 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,8 +68,7 @@ final class DriverResource extends Resource
 
         $latestSeason = Season::query()
             ->orderBy('year', 'DESC')
-            ->first()
-            ->value('year');
+            ->first();
 
         return $table
             ->modifyQueryUsing(function (Builder $query) {
@@ -84,6 +85,17 @@ final class DriverResource extends Resource
                     ->state(fn (Driver $driver) => $driver->fullName())
                     ->copyable(),
 
+                TextColumn::make('team')
+                    ->label('Current team')
+                    ->state(fn (Driver $record) => $record->teamForSeason($latestSeason)?->short_name),
+
+                SeriesBadge::make('series')
+                    ->state(function (Driver $record) use ($latestSeason) {
+                        $team = $record->teamForSeason($latestSeason);
+
+                        return $team?->series;
+                    }),
+
                 TextColumn::make('date_of_birth')
                     ->sortable()
                     ->date('F jS, Y'),
@@ -95,7 +107,7 @@ final class DriverResource extends Resource
                     ->alignCenter(),
 
                 TextColumn::make('age')
-                    ->state(fn (Driver $record) => $record->ageForSeason($latestSeason))
+                    ->state(fn (Driver $record) => $record->ageForSeason($latestSeason->year))
                     ->width('1%')
                     ->alignCenter(),
 
@@ -147,6 +159,10 @@ final class DriverResource extends Resource
                                 fn (Builder $query, int $rating) => $query->where('rating', '<=', $rating),
                             );
                     }),
+
+                SelectFilter::make('series')
+                    ->relationship('series', 'name', hasEmptyOption: true)
+                    ->emptyRelationshipOptionLabel('Free agent'),
 
                 TernaryFilter::make('retired'),
             ])
