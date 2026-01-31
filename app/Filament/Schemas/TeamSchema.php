@@ -46,9 +46,8 @@ final readonly class TeamSchema
 
                     Select::make('ownership_group_id')
                         ->relationship('ownershipGroup', 'name')
-                        ->options(function (Get $get) {
+                        ->options(function () {
                             return OwnershipGroup::query()
-                                ->where('season_id', $get('season_id'))
                                 ->with('users')
                                 ->orderBy('name')
                                 ->get()

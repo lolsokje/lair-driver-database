@@ -14,7 +14,7 @@ final class UserSeeder extends Seeder
     public function run(): void
     {
         /** @var Season $season */
-        $season = Season::create([
+        Season::create([
             'year' => config('app.start_year'),
         ]);
 
@@ -40,7 +40,6 @@ final class UserSeeder extends Seeder
 
             /** @var OwnershipGroup $group */
             $group = OwnershipGroup::create([
-                'season_id' => $season->id,
                 'name' => $name,
             ]);
 

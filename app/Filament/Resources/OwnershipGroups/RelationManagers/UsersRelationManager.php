@@ -44,14 +44,9 @@ final class UsersRelationManager extends RelationManager
 
                         // Ensures users used in other ownership groups this season aren't shown
                         return $query
-                            ->whereNotIn('users.id', function (QueryBuilder $userQuery) use ($group) {
+                            ->whereNotIn('users.id', function (QueryBuilder $userQuery) {
                                 return $userQuery->select('user_id')
-                                    ->from('ownership_group_user')
-                                    ->whereIn('ownership_group_id', function (QueryBuilder $seasonQuery) use ($group) {
-                                        $seasonQuery->select('id')
-                                            ->from('ownership_groups')
-                                            ->where('season_id', $group->season_id);
-                                    });
+                                    ->from('ownership_group_user');
                             });
                     })
                     ->preloadRecordSelect(),
