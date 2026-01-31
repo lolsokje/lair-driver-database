@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Resources\Drivers;
 
 use App\Enums\NavigationGroup;
+use App\Enums\SeasonStatus;
 use App\Filament\Resources\Drivers\Pages\CreateDriver;
 use App\Filament\Resources\Drivers\Pages\EditDriver;
 use App\Filament\Resources\Drivers\Pages\ListDrivers;
@@ -67,8 +68,14 @@ final class DriverResource extends Resource
         $maxDriverRating = Driver::query()->max('rating');
 
         $latestSeason = Season::query()
-            ->orderBy('year', 'DESC')
+            ->where('status', SeasonStatus::ACTIVE)
             ->first();
+
+        if (! $latestSeason) {
+            $latestSeason = Season::query()
+                ->orderBy('year', 'DESC')
+                ->first();
+        }
 
         return $table
             ->modifyQueryUsing(function (Builder $query) {
