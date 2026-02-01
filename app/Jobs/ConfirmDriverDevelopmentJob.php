@@ -7,14 +7,13 @@ namespace App\Jobs;
 use App\Enums\DevelopmentResultStatus;
 use App\Models\DevelopmentResult;
 use App\Models\DevelopmentRound;
-use App\Models\Driver;
+use App\Models\Season;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\Attributes\WithoutRelations;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Collection;
 
 final class ConfirmDriverDevelopmentJob implements ShouldQueue
 {
@@ -39,8 +38,8 @@ final class ConfirmDriverDevelopmentJob implements ShouldQueue
             ],
         ]);
 
-        /** @var Collection<int, Driver> $driversInSeason */
-        $driversInSeason = $this->developmentRound->season->drivers->collect();
+        /** @var Season $season */
+        $season = $this->developmentRound->season;
 
         /** @var DevelopmentResult $result */
         foreach ($this->developmentRound->developmentResults as $result) {
@@ -49,14 +48,6 @@ final class ConfirmDriverDevelopmentJob implements ShouldQueue
             }
 
             $driver = $result->driver;
-            /** @var ?Driver $seasonDriver */
-            $seasonDriver = $driversInSeason->where('id', $driver->id)->first();
-
-            if (! $seasonDriver) {
-                $result->markFailed();
-
-                continue;
-            }
 
             $newRating = $result->old_rating + $result->development;
 
@@ -64,7 +55,7 @@ final class ConfirmDriverDevelopmentJob implements ShouldQueue
                 'rating' => $newRating,
             ]);
 
-            $seasonDriver->update([
+            $season->drivers()->updateExistingPivot($driver->id, [
                 'rating' => $newRating,
             ]);
 

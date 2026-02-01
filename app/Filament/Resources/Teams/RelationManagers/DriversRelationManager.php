@@ -27,6 +27,8 @@ final class DriversRelationManager extends RelationManager
 {
     protected static string $relationship = 'drivers';
 
+    private array $drivers = [];
+
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -45,6 +47,9 @@ final class DriversRelationManager extends RelationManager
 
     public function table(Table $table): Table
     {
+        /** @var Season $season */
+        $season = $this->getOwnerRecord();
+
         return $table
             ->modifyQueryUsing(function (Builder $query) {
                 return $query
@@ -63,6 +68,11 @@ final class DriversRelationManager extends RelationManager
             ->recordTitleAttribute('given_name')
             ->columns([
                 TextColumn::make('driver_sheet_id')
+                    ->state(function (Driver $record) use ($season) {
+                        $driver = $this->getSeasonDriver($season, $record);
+
+                        return $driver->pivot->driver_sheet_id;
+                    })
                     ->label('ID')
                     ->alignCenter()
                     ->copyable()
@@ -92,10 +102,7 @@ final class DriversRelationManager extends RelationManager
                     ->width('1%'),
 
                 TextColumn::make('season.year')
-                    ->state(function (Driver $record) {
-                        /** @var Season $season */
-                        $season = $this->getOwnerRecord();
-
+                    ->state(function (Driver $record) use ($season) {
                         /** @var Season $driverSeason */
                         $driverSeason = $record->season->where('year', $season->year)->first();
 
@@ -107,6 +114,11 @@ final class DriversRelationManager extends RelationManager
                     ->hidden(fn () => $this->isOnTeamsPage()),
 
                 TextColumn::make('rating')
+                    ->state(function (Driver $record) use ($season) {
+                        $result = $this->getSeasonDriver($season, $record);
+
+                        return $result->pivot->rating;
+                    })
                     ->width('1%')
                     ->copyable()
                     ->alignCenter(),
@@ -188,5 +200,25 @@ final class DriversRelationManager extends RelationManager
     public function isOnTeamsPage(): bool
     {
         return $this->getOwnerRecord() instanceof Team;
+    }
+
+    private function getSeasonDriver(
+        Season|Team $owner,
+        Driver $driver,
+    ): Driver {
+        if (! array_key_exists($driver->id, $this->drivers)) {
+            $this->drivers[$driver->id] = $owner->drivers()
+                ->where('driver_id', $driver->id)
+                ->where('season_id', $owner instanceof Season ? $owner->id : $owner->season_id)
+                ->withPivot([
+                    'number',
+                    'rating',
+                    'driver_sheet_id',
+                    'reserve',
+                ])
+                ->first();
+        }
+
+        return $this->drivers[$driver->id];
     }
 }

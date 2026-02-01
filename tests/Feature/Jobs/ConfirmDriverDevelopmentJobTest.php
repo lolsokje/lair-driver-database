@@ -45,10 +45,14 @@ test('applies driver development correctly', function () {
     $developmentResult->refresh();
     $driver->refresh();
 
-    /** @var Driver $seasonDriver */
-    $seasonDriver = $team->drivers()->first();
-    $this->assertEquals($driver->rating, $developmentResult->old_rating + $developmentResult->development);
-    $this->assertEquals($seasonDriver->rating, $developmentResult->old_rating + $developmentResult->development);
+    $newRating = $developmentResult->old_rating + $developmentResult->development;
+    $this->assertEquals($driver->rating, $newRating);
+    $this->assertDatabaseHas('driver_team', [
+        'driver_id' => $driver->id,
+        'team_id' => $team->id,
+        'season_id' => $season->id,
+        'rating' => $newRating,
+    ]);
 
     $this->assertEquals(DevelopmentResultStatus::APPLIED, $developmentResult->status);
 });
