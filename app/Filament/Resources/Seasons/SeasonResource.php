@@ -9,7 +9,6 @@ use App\Enums\SeasonStatus;
 use App\Filament\Resources\Seasons\Pages\CreateSeason;
 use App\Filament\Resources\Seasons\Pages\EditSeason;
 use App\Filament\Resources\Seasons\Pages\ListSeasons;
-use App\Filament\Resources\Seasons\RelationManagers\OwnershipGroupsRelationManager;
 use App\Filament\Resources\Seasons\RelationManagers\TeamsRelationManager;
 use App\Filament\Resources\Teams\RelationManagers\DriversRelationManager;
 use App\Models\Season;
@@ -73,7 +72,6 @@ final class SeasonResource extends Resource
         return [
             TeamsRelationManager::class,
             DriversRelationManager::class,
-            OwnershipGroupsRelationManager::class,
         ];
     }
 
